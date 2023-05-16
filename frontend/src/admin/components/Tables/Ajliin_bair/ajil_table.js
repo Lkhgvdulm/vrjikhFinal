@@ -10,7 +10,7 @@ const Ajil_table =() => {
 	const [AJIL, setAjil] = useState([]);
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
-	const [refreshKey, setRefreshKey] = useState(false);
+	const [refreshKey, setRefreshKey] = useState(0);
 	useEffect(() => {
 		const getSlider = async () => {
 			const { data } = await axios.get(`${url}/workplace`);
@@ -45,7 +45,7 @@ const Ajil_table =() => {
 		}
 	}
 	const deleteSlider = async (itemId) => {
-		const { data } = await axios.delete(`${url}/workplalce_delete/${itemId}`);
+		const { data } = await axios.delete(`${url}/workplace_delete/${itemId}`);
 		if(data.success) {
 			setRefreshKey((old) => old +1);
 			Swal.fire({

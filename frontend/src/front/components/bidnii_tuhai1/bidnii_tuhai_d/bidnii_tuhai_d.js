@@ -17,7 +17,7 @@ const Bidnii_tuhai_d = () => {
 		<div>
 			<div className="container_1">
 				<div className="header_1">
-					<h1>БИДНИЙ ТУХАЙ</h1>
+					<h1>КОМПАНИЙН ДОТООД БҮТЭЦ</h1>
 					<div className="line-3">
 						<div className="line-menu3"></div>
 					</div>

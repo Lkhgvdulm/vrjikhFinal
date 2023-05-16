@@ -12,22 +12,22 @@ const Medee_table = () => {
 	const [description, setDescription] = useState('');
 	const [image, setImage] = useState(false);
 	const [refreshKey, setRefreshKey] = useState(false);
-	const [newImage, setNewImage] = useState(false);
 	useEffect(() => {
 		const getNews = async () => {
 			const { data } = await axios.get(`${url}/news`);
+			console.log('da',data);
 			setNews(data.data);
 		};
 		getNews();
 	}, [refreshKey]);
-	async function createSlider(event) {
-		event.preventDefalut();
+	async function createNews(event) {
+		event.preventDefault();
 		let formdata = new FormData();
 		formdata.append('name', name);
 		formdata.append('description', description);
 		formdata.append('avatar', image[0]);
 		const { data } = await axios.post(`${url}/news_create`, formdata);
-		if(data.success) {
+		if (data.success) {
 			console.log('Амжилттай нэмэгдлээ');
 			setRefreshKey((old) => old + 1);
 			setName('');
@@ -35,10 +35,10 @@ const Medee_table = () => {
 			setImage(null);
 			setOpened(false);
 			Swal.fire({
-				title:'Амжилттай нэмэгдлээ', 
+				title: 'Амжилттай нэмэгдлээ',
 				icon: 'success',
 			});
-			if(!data.success) {
+			if (!data.success) {
 				Swal.fire({
 					title: 'Амжилтгүй',
 					icon: 'error',
@@ -47,22 +47,22 @@ const Medee_table = () => {
 			}
 		}
 	}
-	const deleteNews  = async(itemId) => {
-		const { data } = await axios.delete(`${url}/news_delete${itemId}`);
-		if(data.success) {
+	const deleteNews = async (itemId) => {
+		const { data } = await axios.delete(`${url}/news_delete/${itemId}`);
+		if (data.success) {
 			setRefreshKey((old) => old + 1);
 			Swal.fire({
 				title: 'Амжилттай устгалаа',
 				icon: 'success',
 			});
-			if(!data.success) {
+			if (!data.success) {
 				Swal.fire({
-					title: 'Амжилтгүй', 
+					title: 'Амжилтгүй',
 					icon: 'error',
-				})
+				});
 			}
 		}
-	}
+	};
 	return (
 		<div>
 			<div className="flex space-x-2 justify-end">
@@ -85,13 +85,13 @@ const Medee_table = () => {
 											scope="col"
 											className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
 										>
-											Name
+											Нэр
 										</th>
 										<th
 											scope="col"
 											className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
 										>
-											description
+											Тайлбар
 										</th>
 										<th
 											scope="col"
@@ -110,26 +110,26 @@ const Medee_table = () => {
 								<tbody>
 									{NEWS.map((row) => (
 										<tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-										<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-											{row.name}
-										</td>
-										<td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-											{row.description}
-										</td>
-										<td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-											<img
-												className="w-[100px] h-[80px]"
-												sr
-												c={`${CDNURL}/${row.avatar}`}
-											/>
-										</td>
-										<td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-											<AiOutlineDelete
-												className="text-red-500 text-lg"
-												onClick={() => deleteNews(row._id)}
-											/>
-										</td>
-									</tr>
+											<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+												{row.name}
+											</td>
+											<td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+												{row.description}
+											</td>
+											<td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+												<img
+													className="w-[100px] h-[80px]"
+													sr
+													c={`${CDNURL}/${row.avatar}`}
+												/>
+											</td>
+											<td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+												<AiOutlineDelete
+													className="text-red-500 text-lg"
+													onClick={() => deleteNews(row._id)}
+												/>
+											</td>
+										</tr>
 									))}
 								</tbody>
 							</table>
@@ -137,7 +137,7 @@ const Medee_table = () => {
 					</div>
 				</div>
 			</div>
-			<Modal opened={opened} onClose={() => setOpened(false)} title="Banner">
+			<Modal opened={opened} onClose={() => setOpened(false)} title="Value">
 				<div className="flex justify-center">
 					<div className="mb-3 xl:w-96">
 						<label
@@ -168,7 +168,7 @@ const Medee_table = () => {
 							id="exampleFormControlInput1"
 							value={name}
 							onChange={(e) => setName(e.target.value)}
-							placeholder="Banner нэмэх"
+							placeholder="Name"
 						/>
 					</div>
 				</div>
@@ -202,7 +202,7 @@ const Medee_table = () => {
 							id="exampleFormControlInput1"
 							value={description}
 							onChange={(e) => setDescription(e.target.value)}
-							placeholder="Banner daraalal"
+							placeholder="Title"
 						/>
 					</div>
 				</div>
@@ -236,10 +236,10 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
 							onChange={(e) => {
 								if (e.target?.files) {
 									setImage(e.target.files);
-									setNewImage(true);
+									// setNewImage(true);
 								} else {
 									setImage(null);
-									setNewImage(false);
+									// setNewImage(false);
 								}
 							}}
 						/>
@@ -251,7 +251,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
 						data-mdb-ripple="true"
 						data-mdb-ripple-color="light"
 						className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-						onClick={createSlider}
+						onClick={createNews}
 					>
 						Нэмэх
 					</button>

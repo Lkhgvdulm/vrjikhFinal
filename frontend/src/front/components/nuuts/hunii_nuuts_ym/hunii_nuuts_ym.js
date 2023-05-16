@@ -5,13 +5,21 @@ import './hunii_nuuts_ym.css';
 
 const Hunii_nuuts_ym = () => {
 	const [workplace, setWorkplace] = useState([]);
-	const [davtalt, setDavtalt] = useState([]);
+	const [task, setTask] = useState([]);
 	useEffect(() => {
 		const getWorkplace = async () => {
 			const { data } = await axios.get(`${url}/resource`);
 			setWorkplace(data.data);
 		};
 		getWorkplace();
+	}, []);
+	useEffect(() => {
+		const getTask = async () => {
+			const { data } = await axios.get(`${url}/task`);
+			console.log("task",data)
+			setTask(data.data);
+		};
+		getTask();
 	}, []);
 	return (
 		<div>
@@ -42,8 +50,8 @@ const Hunii_nuuts_ym = () => {
 						<h2>БИДНИЙ ЗОРИЛТ</h2>
 						<div>
 							<ul className="list">
-								{davtalt.map((row) => (
-									<li>{row.description}</li>
+								{task.map((row) => (
+									<li>{row.name}</li>
 									))}
 							</ul>
 						</div>

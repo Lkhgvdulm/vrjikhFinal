@@ -60,7 +60,7 @@ exports.deleteWorkplace = catchAsync(async(req, res, next) => {
     const { id } = req.params;
     const workplace = await Workplace.findByIdAndDelete(id);
     if(!workplace) {
-        return next(new AppError('fails', 400));
+        return next(new AppError('fails, 400'));
     }
     res.status(200).json ({
         success: true, 

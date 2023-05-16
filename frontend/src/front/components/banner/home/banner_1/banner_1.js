@@ -9,7 +9,6 @@ const Banner_1 = () => {
 	useEffect(() => {
 		const getBanner = async () => {
 			const { data } = await axios.get(`${url}/banner`);
-			console.log(data);
 			setSlider(data.data);
 		};
 		getBanner();

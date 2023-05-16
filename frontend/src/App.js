@@ -22,6 +22,7 @@ import Ajliin_bair from './admin/pages/Ajliin_bair/ajliin_bair';
 import Logo from './admin/pages/Logo/logo';
 import Medee from './admin/pages/Medee/medee';
 import Hayag from './admin/pages/Hayag/hayag';
+import Zorilt from './admin/pages/Zorilt/zorilt';
 
 // Admin Page Import Tugsgul
 
@@ -49,9 +50,12 @@ function App() {
 				<Route path="/dashboard/logo" element={<Logo />} />
 				<Route path="/dashboard/Medee" element={<Medee />} />
 				<Route path="/dashboard/hayag" element={<Hayag />} />
+				<Route path="/dashboard/task" element={<Zorilt />} />
+
 				{/* Admin Panel Route tugsgul */}
 			</Routes>
 		</BrowserRouter>
 	);
 }
-export default App;
+export default App
+

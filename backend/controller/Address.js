@@ -12,13 +12,12 @@ exports.getAddress = catchAsync(async(req, res) => {
 
 exports.createAddress = catchAsync(async(req, res, next) => {
     try {
-        const { name, orders } = req.body;
+        const { name } = req.body;
         const { avatar } = req.files;
-        const address_image = new Address({
-            avatar: avatar[0].path,
+        const address_image = new Address ({
             name: name,
-            orders: orders,
-        });
+            avatar: avatar[0].path,
+        })
         const address = await address_image.save();
         res.status(200).json ({
             success: true,
@@ -33,7 +32,7 @@ exports.createAddress = catchAsync(async(req, res, next) => {
 exports.editAddress = catchAsync(async(req, res) => {
     try {
         const { id } = req.params;
-        const { name, orders, newAvatar, avatarOld } = req.body;
+        const { name, newAvatar, avatarOld } = req.body;
         const address = await Address.findById(id);
         if(name) {
             address.name = name;
@@ -63,10 +62,10 @@ exports.deleteAddress = catchAsync(async(req, res, next) => {
     const { id } = req.params;
     const address = await Address.findByIdAndDelete(id);
     if(!address) {
-        return next(new AppError('falis', 400));
+        return next(new AppError('fails', 400));
     }
     res.status(200).json ({
         success: true,
         data: address,
     });
-})
+});

@@ -10,6 +10,7 @@ const Medeelel = () => {
 	useEffect(() => {
 		const getNews = async () => {
 			const { data }  = await axios.get(`${url}/news`);
+			
 			setMedee(data.data);
 		};
 		getNews();
@@ -27,33 +28,36 @@ const Medeelel = () => {
 			<div className="Newss">
 				<div className="News">
 					<div className="Medee_list">
+					{medee.map((row) =>(
 						<div className="Medee_list_cards">
 							<div>
-								{medee.map((row) =>(
+								
 									<img src={`${CDNURL}/${row.avatar}`} alt="/" />
-								))}
+								
 							</div>
-
 							<div className="text">
 								<h3>
 									<div>
-										{medee.map((row) => (
+										{/* {medee.map((row) => (
 											<p>{row.name}</p>
-										))}
+										))} */}
+										<p>{row.name}</p>
 									</div>
 								</h3>
 								<br></br>
 								<div className="date">
-									{medee.map((row) => (
+									{/* {medee.map((row) => (
 										<h3>{row.description}</h3>
-									))}
+									))} */}
+									<h3>{row.description}</h3>
 								</div>
 								<br></br>
 								{/* <div className="more">
 									<Link to="/delgerengui">Дэлгэрэнгүй</Link>
 								</div> */}
 							</div>
-						</div>					
+						</div>	
+						))}				
 					</div>
 
 					<div className="Medee_facebook">

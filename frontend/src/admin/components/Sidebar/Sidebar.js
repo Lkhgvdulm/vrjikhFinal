@@ -102,6 +102,14 @@ const Sidebar = () => {
 						</span>
 					</span>
 				</div>
+				<div className="Sidebar_MenuButton">
+					<span className="Sidebar_MenuSpan">
+						<div className="Sidebar_Menu_span_icon"></div>
+						<span className="Sidebar_Menu_list">
+							<Link to={'/dashboard/task'}>Зорилт</Link>
+						</span>
+					</span>
+				</div>
 				
 			</div>
 		</div>

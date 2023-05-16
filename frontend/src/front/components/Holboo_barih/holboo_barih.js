@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsFillGeoAltFill } from 'react-icons/bs';
 import { IoCallSharp } from 'react-icons/io5';
 import { BiAt } from 'react-icons/bi';
+import { CDNURL, url } from '../../../utils/url';
 import './holboo_barih.css';
+import axios from 'axios';
 
 const Holboo_barih = () => {
+	const [address, setAddress] = useState([]);
+	useEffect(() => {
+		const getAddress = async () => {
+			const { data } = await axios.get(`${url}/address`);
+			console.log('ds',data);
+			setAddress(data.data);
+		};
+		getAddress();
+	}, [])
 	return (
 		<div>
 			<div className="contact_container">
@@ -29,6 +40,7 @@ const Holboo_barih = () => {
 					></iframe>
 				</div>
 				<div className="maps_hayg">
+
 					<ul>
 						<li>
 							<BsFillGeoAltFill className="map" />
